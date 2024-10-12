@@ -93,6 +93,7 @@ def get_strava_last_time(client, is_milliseconds=True):
 
 
 def upload_file_to_strava(client, file_name, data_type, force_to_run=True):
+  try:
     with open(file_name, "rb") as f:
         try:
             if force_to_run:
@@ -117,3 +118,5 @@ def upload_file_to_strava(client, file_name, data_type, force_to_run=True):
         print(
             f"Uploading {data_type} file: {file_name} to strava, upload_id: {r.upload_id}."
         )
+  except FileNotFoundError:
+    print(f"Error: The file '{file_name}' does not exist.")
